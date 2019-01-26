@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<script type="text/javascript">
+  function iframeLoaded() {
+      var iFrameID = document.getElementById('idIframe');
+	 
+      if(iFrameID) {
+            
+            iFrameID.height = "";
+            iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight+300 + "px";
+      } 
+	  
+  }
+    
+  
+</script> 
+<style>
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+    height: 100%;
+    width: 260px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #b3e6ff;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 260px; 
+    font-size: 28px; 
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+</style>
+</head>
+<body>
+
+<div class="sidenav">
+  <a href="city_pics.php" target="yas">Home Page Places</a>
+  <a href="edit_city.html" target="yas">Add City</a>
+  <a href="edit_place.html" target="yas">Add Place</a>
+ <a href="home.php">Log Out</a>
+</div>
+
+<div class="main">
+<iframe src="frame.html" name="yas" id="idIframe" onload="iframeLoaded()" Scrolling="no" width="100%" frameborder="0"></iframe>
+</div>
+     
+</body>
+</html> 

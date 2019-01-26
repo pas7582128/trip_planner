@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Editing....</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  
+  <script>
+  function preview0(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#preview_pic')
+                    .attr('src', e.target.result)
+                    .width(200)
+                    .height(250);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+	
+	 
+
+
+</script>
+
+
+  <style>
+.btn {
+    background-color: DodgerBlue;
+	width:230px;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: RoyalBlue;
+}
+
+div.pre {
+    position: absolute;
+    top: 180px;
+    right: 180px;
+    width: 200px;
+    height: 250px;
+    border: 1px solid #73AD21;
+}
+
+
+input[type=file]{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+input[type=text] {
+    background-color: #ffff99;
+    
+	
+	width: 25%;
+    padding: 12px 20px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+
+textarea{
+resize:none;
+width:330px;
+height:150px;
+padding:5px;
+margin:20px 0 10px;
+border-radius:5px;
+border:4px solid #acbfa5
+}
+
+.txt{
+ font-size:20px;
+
+}
+
+
+</style>
+
+</head>
+
+<div class="container">
+  <h3>Add City </h3>
+  <hr>
+  <div class="txt">
+  <form action="upload_location.php" method="POST" enctype="multipart/form-data">
+  <input  type="file" onchange="preview0(this);" name = "file"><br>
+  <input type="text" name = "country" placeholder="State"><br>
+  <br><textarea rows="4" cols="50" name="info">Info...</textarea><br>
+  <input type="text" name = "city" placeholder="City"><br>
+  <input type="text" name="lati" placeholder="Latitude" required><br>
+  <input type="text" name="longi" placeholder="Longitude"required><br>
+  
+  
+   <div class="pre">
+  <img src="#" id = "preview_pic" alt="Image preview..."><br><br>
+  </diV>
+  
+  
+  <input class="btn" type="submit" value="submit">
+  </form>
+  </div>
+  
+  
+</div>
+
+
+
+
+
+
+</html>

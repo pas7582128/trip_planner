@@ -1,0 +1,71 @@
+<html>
+
+<head>
+<script>
+function previewFile(){
+       
+       var preview = document.querySelector('img'); 
+       var file    = document.querySelector('input[type=file]').files[0]; 
+       var reader  = new FileReader();
+
+       reader.onloadend = function () {
+           preview.src = reader.result;
+       }
+
+       if (file) {
+           reader.readAsDataURL(file);
+       } else {
+           preview.src = "";
+       }
+	   }
+
+previewFile();
+
+
+</script>
+<style>
+img {
+    border-radius: 90%;
+	
+}
+
+</style>
+</head>
+<div>
+<form action="upload_location.php" method="POST" enctype="multipart/form-data">
+	
+	<input type="file" onchange="previewFile()" name = "file"><br>
+	State<input type="text" name = "country"><br>
+	Info<textarea rows="4" cols="50" name="info" >...</textarea><br>
+  City<input type="text" name = "city"><br>
+<img src="" height="200" alt="Image preview..." height ="150px" width='150px'><br><br>
+Lati<input type="text" name="lati" required><br>
+  Longi<input type="text" name="longi" required><br>
+
+	<input type="submit" value="submit">
+ 
+</form>
+
+</div>
+
+<div>
+
+<form action="upload_location_place.php" method="POST" enctype="multipart/form-data">
+
+  City<input type = "Text" name="city" required><br>
+  <input  type="file" onchange="preview0(this)" name = "file"><br>
+   
+   
+  Place<input type = "Text" name="place" required><br>
+  Desc<textarea rows="4" cols="50" name="description" >...</textarea><br>
+  Lati<input type="text" name="lati" required><br>
+  Longi<input type="text" name="longi" required><br>
+  <input class="btn" type="submit" value="submit">
+  </form>
+ 
+
+
+
+</div>
+
+</html>

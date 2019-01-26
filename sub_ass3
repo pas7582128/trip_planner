@@ -1,0 +1,131 @@
+// DDA ALGO.........
+#include <stdio.h>
+#include <math.h>
+#include <GL/glut.h>
+#include <time.h>
+double X1, Y1, X2, Y2;
+float round_value(float v)
+{
+    return floor(v + 0.5);
+}
+void LineDDA()
+{
+    
+        double dx=(X2-X1);
+    double dy=(Y2-Y1);
+    double steps;
+    float xInc,yInc,x=X1,y=Y1;
+    /* Find out whether to increment x or y */
+    steps=(abs(dx)>abs(dy))?(abs(dx)):(abs(dy));
+    xInc=dx/(float)steps;
+    yInc=dy/(float)steps;
+    /* Clears buffers to preset values */
+    glClear(GL_COLOR_BUFFER_BIT);
+    /* Plot the points */
+    glBegin(GL_POINTS);
+    /* Plot the first point */
+    glVertex2d(x,y);
+    int k;
+    /* For every step, find an intermediate vertex */
+    for(k=0;k<steps;k++)
+    {
+    x+=xInc;
+    y+=yInc;
+    /* printf("%0.6lf %0.6lf\n",floor(x), floor(y)); */
+    glVertex2d(round_value(x), round_value(y));
+    }
+    glEnd();
+    glFlush();
+}
+
+
+void Bresenham(){
+        int dx, dy, p, x, y;
+ 
+        dx=X2-X1;
+        dy=Y2-Y1;
+ 
+        x=X1;
+        y=Y1;
+     /* Clears buffers to preset values */
+    glClear(GL_COLOR_BUFFER_BIT);
+    /* Plot the points */
+    glBegin(GL_POINTS);
+        p=2*dy-dx;
+ 
+        while(x<X2)
+        {
+            if(p>=0)
+            {
+                glVertex2d(x,y);
+               y=y+1;
+                p=p+2*dy-2*dx;
+            }
+            else
+            {
+               glVertex2d(x,y);
+                p=p+2*dy; 
+            }
+            x=x+1;
+        }
+        glEnd();
+    glFlush();    
+}
+
+void Init()
+{
+    /* Set clear color to white */
+    glClearColor(1.0,1.0,1.0,0);
+    /* Set fill color to black */
+    glColor3f(0.0,0.0,0.0);
+    /* glViewport(0 , 0 , 640 , 480); */
+    /* glMatrixMode(GL_PROJECTION); */
+    /* glLoadIdentity(); */
+    gluOrtho2D(0 , 640 , 0 , 480);
+}
+void main(int argc, char **argv)
+{
+        printf("Enter co-ordinates of first point: ");
+        scanf("%lf %lf", &X1, &Y1);
+        printf("Enter co-ordinates of second point: ");
+        scanf("%lf %lf", &X2, &Y2);
+        int choice=0;
+        printf("*****************MENU********************\n");
+        printf("1) DDA\n2) Bresenham\n");
+     printf("Enter your choice: ");
+    scanf("%d",&choice);
+      /* Initialise GLUT library */
+    glutInit(&argc,argv);
+    /* Set the initial display mode */
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    /* Set the initial window position and size */
+    glutInitWindowPosition(0,0);
+    glutInitWindowSize(640,480);
+    /* Create the window with title "DDA_Line" */
+    glutCreateWindow("Line");
+    /* Initialize drawing colors */
+    Init();
+
+//BYDEFAULT NAME VARIABLES!!!!
+        clock_t start=0,end=0;
+        double totalTime=0;
+     switch(choice){
+        case 1: start=clock();
+                glutDisplayFunc(LineDDA);
+                end=clock();
+                totalTime=(double)(end-start)/CLOCKS_PER_SEC;
+                printf("Total Time is %lf\n",totalTime);
+                break;
+        case 2: start=clock();
+                glutDisplayFunc(Bresenham);
+                end=clock();
+                totalTime=(double)(end-start)/CLOCKS_PER_SEC;
+                printf("Total Time is %lf\n",totalTime);
+                break;
+        default: exit(0);
+    }
+        printf("DDA USES FLOATING POINT ARITHMETIC!\n");
+        printf("DDA algorithm is not as accurate and efficient as Bresenham algorithm.\n");
+    /* Keep displaying untill the program is closed */
+    glutMainLoop();
+}
